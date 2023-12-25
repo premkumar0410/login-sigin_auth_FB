@@ -3,7 +3,7 @@ import 'package:login/login_screen.dart';
 
 final theme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color.fromARGB(255, 16, 93, 209)));
+        seedColor: Color.fromARGB(255, 9, 119, 162)));
 void main() {
   runApp(const MyApp());
 }
