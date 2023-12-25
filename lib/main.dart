@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+
+import 'package:login/mainpage.dart';
 import 'package:login/login_screen.dart';
+
 
 final theme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
@@ -21,6 +24,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: theme, home: const LoginScreen());
+    return MaterialApp(
+        theme: theme,
+        home:
+        //firebase switch screen after login succesfully
+         StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return const Mainpage();
+            } else {
+              return const LoginScreen();
+            }
+          },
+        ));
   }
 }
