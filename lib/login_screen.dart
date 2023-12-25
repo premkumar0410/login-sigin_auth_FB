@@ -99,31 +99,50 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 10),
 
               //sigin button
-              GestureDetector(
-                onTap: sigin,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Center(
-                          child: Text('Sigin',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      fontSize: 18,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background)),
-                        )),
+//style 1
+              Container(
+                width: 350,
+                decoration: BoxDecoration(
+                  border: const Border.symmetric(),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[200],
+                  ),
+                  onPressed: sigin,
+                  child: const Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Text('Sigin', style: TextStyle(fontSize: 18)),
                   ),
                 ),
               ),
+//style 2
+              // GestureDetector(
+              //   onTap: sigin,
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 20),
+              //     child: Container(
+              //       decoration: BoxDecoration(
+              //           color: Theme.of(context).colorScheme.primary,
+              //           border: Border.all(color: Colors.white),
+              //           borderRadius: BorderRadius.circular(12)),
+              //       child: Padding(
+              //           padding: const EdgeInsets.all(20),
+              //           child: Center(
+              //             child: Text('Sigin',
+              //                 style: Theme.of(context)
+              //                     .textTheme
+              //                     .bodyMedium!
+              //                     .copyWith(
+              //                         fontSize: 18,
+              //                         color: Theme.of(context)
+              //                             .colorScheme
+              //                             .background)),
+              //           )),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 10),
 
               //not an member? create one
