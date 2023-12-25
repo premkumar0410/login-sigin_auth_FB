@@ -10,9 +10,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  //registerpage  logic
+  var _islogin = true;
+
+  void _registerpage() {
+    setState(() {
+      _islogin = !_islogin;
+    });
+  }
+
   //text controllers
   final _emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
+  //text contoller for username
+  final _usernamecontroller = TextEditingController();
 
   //sigin logic
   Future sigin() async {
@@ -47,14 +58,37 @@ class _LoginScreenState extends State<LoginScreen> {
 
               //welcome pannel
               Text(
-                'Hello Again!',
+                _islogin ? 'Hello Again!' : 'Hello There',
                 style: GoogleFonts.bebasNeue(fontSize: 50),
               ),
-              const Text(
-                'Welcome Back,You\'ve been missed',
-                style: TextStyle(fontSize: 16),
+              Text(
+                _islogin
+                    ? 'Welcome Back,You\'ve been missed'
+                    : 'Register below with your details',
+                style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 25),
+
+              //username when in register page
+              if (!_islogin)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: _usernamecontroller,
+                        decoration: const InputDecoration(
+                            hintText: 'Username', border: InputBorder.none),
+                      ),
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 8),
 
               //useremail textfield
               Padding(
@@ -111,9 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: Colors.grey[200],
                   ),
                   onPressed: sigin,
-                  child: const Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text('Sigin', style: TextStyle(fontSize: 18)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(_islogin ? 'Sign in' : 'Sign up',
+                        style: const TextStyle(fontSize: 18)),
                   ),
                 ),
               ),
@@ -145,19 +180,23 @@ class _LoginScreenState extends State<LoginScreen> {
               // ),
               const SizedBox(height: 10),
 
-              //not an member? create one
+              //not an member? create one => only show when in login page
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Not an Member?',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
                   Text(
-                    ' Register Now',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
+                    _islogin ? 'Not an Member?' : 'Not an New Member!',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  GestureDetector(
+                    onTap: _registerpage,
+                    child: Text(
+                      _islogin ? ' Register Now' : ' Login Now',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   )
                 ],
