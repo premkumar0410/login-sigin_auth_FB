@@ -25,20 +25,24 @@ class _LoginScreenState extends State<LoginScreen> {
   //text contoller for username
   final _usernamecontroller = TextEditingController();
 
-  //sigin logic
+  //sigin-signup logic
   Future sigin() async {
-    final UserCredential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: _emailcontroller.text.trim(),
-            password: _passwordcontroller.text.trim());
-
-    print(UserCredential);
+    if (_islogin) {
+      return await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailcontroller.text.trim(),
+          password: _passwordcontroller.text.trim());
+    } else {
+      return await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailcontroller.text.trim(),
+          password: _passwordcontroller.text.trim());
+    }
   }
 
   @override
   void dispose() {
     _emailcontroller.dispose();
     _passwordcontroller.dispose();
+    _usernamecontroller.dispose();
     super.dispose();
   }
 
@@ -81,6 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        
+                        
                         controller: _usernamecontroller,
                         decoration: const InputDecoration(
                             hintText: 'Username', border: InputBorder.none),
