@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //image
+            //icon
             const Icon(Icons.android, size: 100),
             const SizedBox(height: 25),
 
