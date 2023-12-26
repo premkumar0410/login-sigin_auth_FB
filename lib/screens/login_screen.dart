@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login/screens/forgot_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -57,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //icon
-              const Icon(Icons.android, size: 100),
+              Icon(_islogin ? Icons.android : Icons.person, size: 100),
               const SizedBox(height: 25),
 
               //welcome pannel
@@ -85,8 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        
-                        
                         controller: _usernamecontroller,
                         decoration: const InputDecoration(
                             hintText: 'Username', border: InputBorder.none),
@@ -94,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+
               const SizedBox(height: 8),
 
               //useremail textfield
@@ -136,18 +136,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ForgotPage(),
+                            ));
+                      },
+                      child: Text(
+                        'Forgot Password',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ))
+                ]),
+              ),
               const SizedBox(height: 10),
 
               //sigin button
 //style 1
-              Container(
+              SizedBox(
                 width: 350,
-                decoration: BoxDecoration(
-                  border: const Border.symmetric(),
-                  borderRadius: BorderRadius.circular(12),
-                ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
                     backgroundColor: Colors.grey[200],
                   ),
                   onPressed: sigin,
