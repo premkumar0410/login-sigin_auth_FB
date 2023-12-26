@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase/firebase_options.dart';
 
 
-import 'package:login/mainpage.dart';
+import 'package:login/screens/home_page.dart';
 import 'package:login/screens/login_screen.dart';
 
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const Mainpage();
+              return const Homepage();
             } else {
               return const LoginScreen();
             }
