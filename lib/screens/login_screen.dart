@@ -136,26 +136,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ForgotPage(),
-                            ));
-                      },
-                      child: Text(
-                        'Forgot Password',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ))
-                ]),
-              ),
+              if (_islogin)
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ForgotPage(),
+                              ));
+                        },
+                        child: Text(
+                          'Forgot Password',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ))
+                  ]),
+                ),
               const SizedBox(height: 10),
 
               //sigin button

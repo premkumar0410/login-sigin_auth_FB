@@ -1,4 +1,6 @@
+
 import 'Package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgotPage extends StatefulWidget {
   const ForgotPage({super.key});
@@ -8,6 +10,33 @@ class ForgotPage extends StatefulWidget {
 }
 
 class _ForgotPage extends State<ForgotPage> {
+//text controller
+  final _emailcontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    super.dispose();
+  }
+
+  Future _passwordReset() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: _emailcontroller.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +67,7 @@ class _ForgotPage extends State<ForgotPage> {
                     color: Colors.grey[400],
                   ),
                   child: TextFormField(
+                    controller: _emailcontroller,
                     decoration: const InputDecoration(
                         hintText: ' Email', border: InputBorder.none),
                   ),
@@ -48,7 +78,7 @@ class _ForgotPage extends State<ForgotPage> {
 
             //Submit button
             MaterialButton(
-              onPressed: () {},
+              onPressed: _passwordReset,
               color: Theme.of(context).colorScheme.primary,
               child: const Text(
                 'Submit',
